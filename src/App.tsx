@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import './App.css'; // Import the main CSS file
+import './App.css';
 
-// Inferring types directly in App.tsx
 interface Todo {
   id: string;
   text: string;
@@ -16,7 +15,6 @@ interface TodoFormInput {
 }
 
 const App: React.FC = () => {
-  // --- Global State Management ---
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'light' || savedTheme === 'dark') {
@@ -32,7 +30,6 @@ const App: React.FC = () => {
 
   const [filter, setFilter] = useState<TodoFilter>('all');
 
-  // --- Effects for Theme and Persistence ---
   useEffect(() => {
     document.documentElement.className = theme;
     localStorage.setItem('theme', theme);
@@ -42,7 +39,6 @@ const App: React.FC = () => {
     localStorage.setItem('todos', JSON.stringify(todos));
   }, [todos]);
 
-  // --- Handlers for Theme, Todos, and Filter ---
   const toggleTheme = () => {
     setTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light'));
   };
@@ -81,29 +77,26 @@ const App: React.FC = () => {
   const onSubmitNewTodo = (data: TodoFormInput) => {
     if (data.todoText.trim()) {
       addTodo(data.todoText.trim());
-      reset(); 
+      reset();
     }
   };
 
-  //Filtered Todos List
   const activeTodosCount = todos.filter(todo => !todo.completed).length;
   const filteredTodos = todos.filter(todo => {
     if (filter === 'active') return !todo.completed;
     if (filter === 'completed') return todo.completed;
-    return true; 
+    return true;
   });
 
   return (
     <div className={`app-container ${theme}`}>
+      <header className="header">
+        <h1>TODO</h1>
+        <button onClick={toggleTheme} className="theme-toggle-button" aria-label={`Toggle to ${theme === 'dark' ? 'light' : 'dark'} theme`}>
+          {theme === 'dark' ? '☀️' : '🌙'}
+        </button>
+      </header>
       <div className="content-wrapper">
-        <header className="header">
-          <h1>TODO</h1>
-          <button onClick={toggleTheme} className="theme-toggle-button" aria-label={`Toggle to ${theme === 'dark' ? 'light' : 'dark'} theme`}>
-            {theme === 'dark' ? '☀️' : '🌙'} {/* Simple text icons */}
-          </button>
-        </header>
-
-        {/* Todo Input Form */}
         <form onSubmit={handleSubmit(onSubmitNewTodo)} className="todo-input-form">
           <div className="checkbox-placeholder"></div>
           <input
@@ -115,7 +108,6 @@ const App: React.FC = () => {
           />
         </form>
 
-        {/* Todo List and Footer */}
         <div className="todo-list-card">
           <ul className="todo-items-list">
             {filteredTodos.map(todo => (
@@ -126,7 +118,6 @@ const App: React.FC = () => {
                   aria-label={todo.completed ? `Mark "${todo.text}" as incomplete` : `Mark "${todo.text}" as complete`}
                 >
                   {todo.completed && (
-                    // Simple checkmark SVG
                     <svg className="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <polyline points="20 6 9 17 4 12"></polyline>
                     </svg>
@@ -138,13 +129,12 @@ const App: React.FC = () => {
                   className="delete-todo-button"
                   aria-label={`Delete todo: ${todo.text}`}
                 >
-                  &#x2715; 
+                  &#x2715;
                 </button>
               </li>
             ))}
           </ul>
 
-          {/* List Footer / Filter Bar */}
           <div className="list-footer">
             <span className="items-left-count">{activeTodosCount} items left</span>
             <div className="filter-buttons-group">

@@ -1,6 +1,5 @@
 /* src/App.css */
 
-/* Basic Reset */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -8,65 +7,55 @@
 }
 
 body {
-  font-family: 'Josefin Sans', sans-serif; /* A nice, clean font */
-  margin: 0;
-  padding: 0;
+  font-family: 'Josefin Sans', sans-serif;
   min-height: 100vh;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Base App Container & Theme Backgrounds */
+.dark body {
+  background-color: hsl(235, 21%, 11%);
+  color: hsl(234, 39%, 85%);
+}
+
+.light body {
+  background-color: hsl(236, 33%, 92%);
+  color: hsl(235, 19%, 35%);
+}
+
 .app-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 40px 20px;
+  padding: 0 20px;
   min-height: 100vh;
   box-sizing: border-box;
-  background-repeat: no-repeat;
-  background-size: 100% 300px;
-  background-position: top center;
-  transition: background-image 0.3s ease, background-color 0.3s ease;
 }
 
-/* Dark Theme */
-.dark.app-container {
-  background-color: hsl(235, 21%, 11%); /* Very dark background */
-  color: hsl(234, 39%, 85%); /* Light text */
-  background-image: url('https://placehold.co/1920x300/1e212d/FFFFFF?text=Dark+Desktop+BG');
-}
-
-/* Light Theme */
-.light.app-container {
-  background-color: hsl(236, 33%, 92%); /* Light background */
-  color: hsl(235, 19%, 35%); /* Darker text */
-  background-image: url('https://placehold.co/1920x300/F5F5F5/333333?text=Light+Desktop+BG');
-}
-
-/* Mobile Backgrounds */
-@media (max-width: 600px) {
-  .dark.app-container {
-    background-image: url('https://placehold.co/600x200/1e212d/FFFFFF?text=Dark+Mobile+BG');
-  }
-  .light.app-container {
-    background-image: url('https://placehold.co/600x200/F5F5F5/333333?text=Light+Mobile+BG');
-  }
-}
-
-/* Content Wrapper to constrain width */
-.content-wrapper {
-  width: 100%;
-  max-width: 540px;
-}
-
-/* Header Styles */
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
-  padding: 20px 0;
+  width: 100vw;
+  padding: 40px 20px;
   margin-bottom: 30px;
+  background-size: cover;
+  background-position: center;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+.dark .header {
+  background: linear-gradient(135deg, hsl(235, 21%, 20%), hsl(235, 21%, 14%));
+}
+
+.light .header {
+  background: linear-gradient(135deg, hsl(200, 50%, 70%), hsl(200, 50%, 85%));
+}
+
+@media (max-width: 600px) {
+  .header {
+    background-size: cover;
+  }
 }
 
 .header h1 {
@@ -75,6 +64,7 @@ body {
   color: #fff;
   letter-spacing: 10px;
   text-transform: uppercase;
+  z-index: 10;
 }
 
 .theme-toggle-button {
@@ -85,13 +75,21 @@ body {
   font-size: 24px;
   outline: none;
   transition: transform 0.2s ease-in-out;
+  z-index: 10;
 }
 
 .theme-toggle-button:hover {
   transform: scale(1.1);
 }
 
-/* Todo Input Form Styles */
+.content-wrapper {
+  width: 100%;
+  max-width: 540px;
+  margin-top: -100px;
+  position: relative;
+  z-index: 100;
+}
+
 .todo-input-form {
   display: flex;
   align-items: center;
@@ -146,7 +144,6 @@ body {
   color: hsl(233, 14%, 35%);
 }
 
-/* Todo List Card */
 .todo-list-card {
   background-color: #fff;
   border-radius: 5px;
@@ -166,7 +163,6 @@ body {
   margin: 0;
 }
 
-/* Individual Todo Item */
 .todo-item {
   display: flex;
   align-items: center;
@@ -206,7 +202,7 @@ body {
 
 .todo-checkbox:hover,
 .todo-checkbox:focus {
-  border-color: hsl(220, 98%, 61%); /* Blue hover/focus */
+  border-color: hsl(220, 98%, 61%);
 }
 
 .completed .todo-checkbox {
@@ -254,14 +250,13 @@ body {
 
 .delete-todo-button:hover,
 .delete-todo-button:focus {
-  color: hsl(0, 100%, 60%); /* Red on hover */
+  color: hsl(0, 100%, 60%);
 }
 
 .dark .delete-todo-button {
   color: hsl(233, 14%, 35%);
 }
 
-/* List Footer / Filter Bar */
 .list-footer {
   display: flex;
   justify-content: space-between;
@@ -279,13 +274,13 @@ body {
 }
 
 .items-left-count {
-  /* Inherits color from parent */
+  flex-shrink: 0;
 }
 
 .filter-buttons-group {
   display: flex;
   gap: 10px;
-  background-color: #fff; /* White background for filters on mobile */
+  background-color: #fff;
   padding: 10px 15px;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -324,7 +319,7 @@ body {
 }
 
 .filter-button.active-filter {
-  color: hsl(220, 98%, 61%); /* Active blue color */
+  color: hsl(220, 98%, 61%);
   font-weight: bold;
 }
 
@@ -349,7 +344,6 @@ body {
   color: hsl(233, 14%, 35%);
 }
 
-/* Drag info text */
 .drag-info-text {
   text-align: center;
   color: hsl(236, 9%, 61%);
@@ -362,8 +356,20 @@ body {
   color: hsl(233, 14%, 35%);
 }
 
-/* Responsive adjustments for footer/filter bar */
 @media (max-width: 600px) {
+  .app-container {
+    padding: 0;
+  }
+
+  .header {
+    padding: 40px 20px;
+  }
+
+  .content-wrapper {
+    width: calc(100% - 40px);
+    margin-top: -100px;
+  }
+
   .list-footer {
     flex-direction: column;
     align-items: center;
@@ -373,5 +379,6 @@ body {
   .filter-buttons-group {
     width: 100%;
     justify-content: center;
+    order: 3;
   }
 }
