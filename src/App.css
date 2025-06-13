@@ -1,0 +1,377 @@
+/* src/App.css */
+
+/* Basic Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Josefin Sans', sans-serif; /* A nice, clean font */
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Base App Container & Theme Backgrounds */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
+  min-height: 100vh;
+  box-sizing: border-box;
+  background-repeat: no-repeat;
+  background-size: 100% 300px;
+  background-position: top center;
+  transition: background-image 0.3s ease, background-color 0.3s ease;
+}
+
+/* Dark Theme */
+.dark.app-container {
+  background-color: hsl(235, 21%, 11%); /* Very dark background */
+  color: hsl(234, 39%, 85%); /* Light text */
+  background-image: url('https://placehold.co/1920x300/1e212d/FFFFFF?text=Dark+Desktop+BG');
+}
+
+/* Light Theme */
+.light.app-container {
+  background-color: hsl(236, 33%, 92%); /* Light background */
+  color: hsl(235, 19%, 35%); /* Darker text */
+  background-image: url('https://placehold.co/1920x300/F5F5F5/333333?text=Light+Desktop+BG');
+}
+
+/* Mobile Backgrounds */
+@media (max-width: 600px) {
+  .dark.app-container {
+    background-image: url('https://placehold.co/600x200/1e212d/FFFFFF?text=Dark+Mobile+BG');
+  }
+  .light.app-container {
+    background-image: url('https://placehold.co/600x200/F5F5F5/333333?text=Light+Mobile+BG');
+  }
+}
+
+/* Content Wrapper to constrain width */
+.content-wrapper {
+  width: 100%;
+  max-width: 540px;
+}
+
+/* Header Styles */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 20px 0;
+  margin-bottom: 30px;
+}
+
+.header h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #fff;
+  letter-spacing: 10px;
+  text-transform: uppercase;
+}
+
+.theme-toggle-button {
+  background: none;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 24px;
+  outline: none;
+  transition: transform 0.2s ease-in-out;
+}
+
+.theme-toggle-button:hover {
+  transform: scale(1.1);
+}
+
+/* Todo Input Form Styles */
+.todo-input-form {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+  margin-bottom: 20px;
+}
+
+.dark .todo-input-form {
+  background-color: hsl(235, 24%, 19%);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+.checkbox-placeholder {
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  border-radius: 50%;
+  border: 1px solid hsl(233, 11%, 84%);
+  margin-right: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dark .checkbox-placeholder {
+  border-color: hsl(237, 14%, 26%);
+}
+
+.todo-input-field {
+  flex-grow: 1;
+  border: none;
+  background-color: transparent;
+  font-size: 1rem;
+  color: hsl(235, 19%, 35%);
+  outline: none;
+  padding: 0;
+}
+
+.dark .todo-input-field {
+  color: hsl(234, 39%, 85%);
+}
+
+.todo-input-field::placeholder {
+  color: hsl(236, 9%, 61%);
+}
+
+.dark .todo-input-field::placeholder {
+  color: hsl(233, 14%, 35%);
+}
+
+/* Todo List Card */
+.todo-list-card {
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dark .todo-list-card {
+  background-color: hsl(235, 24%, 19%);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+.todo-items-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Individual Todo Item */
+.todo-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 20px;
+  border-bottom: 1px solid hsl(233, 11%, 84%);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.dark .todo-item {
+  border-color: hsl(237, 14%, 26%);
+}
+
+.todo-item:last-child {
+  border-bottom: none;
+}
+
+.todo-checkbox {
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  border-radius: 50%;
+  border: 1px solid hsl(233, 11%, 84%);
+  background-color: transparent;
+  margin-right: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.dark .todo-checkbox {
+  border-color: hsl(237, 14%, 26%);
+}
+
+.todo-checkbox:hover,
+.todo-checkbox:focus {
+  border-color: hsl(220, 98%, 61%); /* Blue hover/focus */
+}
+
+.completed .todo-checkbox {
+  background: linear-gradient(to right bottom, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+  border-color: transparent;
+}
+
+.check-icon {
+  width: 16px;
+  height: 16px;
+  color: #fff;
+}
+
+.todo-item-text {
+  flex-grow: 1;
+  font-size: 1rem;
+  color: hsl(235, 19%, 35%);
+  transition: color 0.3s ease;
+}
+
+.dark .todo-item-text {
+  color: hsl(234, 39%, 85%);
+}
+
+.completed .todo-item-text {
+  text-decoration: line-through;
+  color: hsl(236, 9%, 61%);
+}
+
+.dark .completed .todo-item-text {
+  color: hsl(233, 14%, 35%);
+}
+
+.delete-todo-button {
+  background: none;
+  border: none;
+  padding: 5px;
+  font-size: 1.2rem;
+  line-height: 1;
+  color: hsl(236, 9%, 61%);
+  cursor: pointer;
+  outline: none;
+  transition: color 0.3s ease;
+}
+
+.delete-todo-button:hover,
+.delete-todo-button:focus {
+  color: hsl(0, 100%, 60%); /* Red on hover */
+}
+
+.dark .delete-todo-button {
+  color: hsl(233, 14%, 35%);
+}
+
+/* List Footer / Filter Bar */
+.list-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  font-size: 0.9rem;
+  color: hsl(236, 9%, 61%);
+  border-top: 1px solid hsl(233, 11%, 84%);
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.dark .list-footer {
+  color: hsl(233, 14%, 35%);
+  border-color: hsl(237, 14%, 26%);
+}
+
+.items-left-count {
+  /* Inherits color from parent */
+}
+
+.filter-buttons-group {
+  display: flex;
+  gap: 10px;
+  background-color: #fff; /* White background for filters on mobile */
+  padding: 10px 15px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dark .filter-buttons-group {
+  background-color: hsl(235, 24%, 19%);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+.filter-button {
+  background: none;
+  border: none;
+  color: hsl(236, 9%, 61%);
+  font-size: 0.9rem;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 3px;
+  outline: none;
+  transition: color 0.3s ease;
+}
+
+.filter-button:hover,
+.filter-button:focus {
+  color: hsl(235, 19%, 35%);
+}
+
+.dark .filter-button {
+  color: hsl(233, 14%, 35%);
+}
+
+.dark .filter-button:hover,
+.dark .filter-button:focus {
+  color: hsl(234, 39%, 85%);
+}
+
+.filter-button.active-filter {
+  color: hsl(220, 98%, 61%); /* Active blue color */
+  font-weight: bold;
+}
+
+.clear-completed-button {
+  background: none;
+  border: none;
+  color: hsl(236, 9%, 61%);
+  font-size: 0.9rem;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 3px;
+  outline: none;
+  transition: color 0.3s ease;
+}
+
+.clear-completed-button:hover,
+.clear-completed-button:focus {
+  color: hsl(235, 19%, 35%);
+}
+
+.dark .clear-completed-button {
+  color: hsl(233, 14%, 35%);
+}
+
+/* Drag info text */
+.drag-info-text {
+  text-align: center;
+  color: hsl(236, 9%, 61%);
+  font-size: 0.8rem;
+  padding: 15px 0;
+  transition: color 0.3s ease;
+}
+
+.dark .drag-info-text {
+  color: hsl(233, 14%, 35%);
+}
+
+/* Responsive adjustments for footer/filter bar */
+@media (max-width: 600px) {
+  .list-footer {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .filter-buttons-group {
+    width: 100%;
+    justify-content: center;
+  }
+}
