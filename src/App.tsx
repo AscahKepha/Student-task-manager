@@ -23,9 +23,20 @@ const App: React.FC = () => {
     return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   });
 
+
+  const initialTodos: Todo[] = [
+    { id: '1', text: 'Complete online JavaScript course', completed: true },
+    { id: '2', text: 'Jog around the park 3x', completed: false },
+    { id: '3', text: '10 minutes meditation', completed: false },
+    { id: '4', text: 'Read for 1 hour', completed: false },
+    { id: '5', text: 'Pick up groceries', completed: false },
+    { id: '6', text: 'Complete Todo App on Frontend Mentor', completed: false },
+  ];
+
   const [todos, setTodos] = useState<Todo[]>(() => {
     const savedTodos = localStorage.getItem('todos');
-    return savedTodos ? JSON.parse(savedTodos) : [];
+  
+    return savedTodos ? JSON.parse(savedTodos) : initialTodos;
   });
 
   const [filter, setFilter] = useState<TodoFilter>('all');
@@ -93,7 +104,7 @@ const App: React.FC = () => {
       <header className="header">
         <h1>TODO</h1>
         <button onClick={toggleTheme} className="theme-toggle-button" aria-label={`Toggle to ${theme === 'dark' ? 'light' : 'dark'} theme`}>
-          {theme === 'dark' ? '☀️' : '🌙'}
+          {theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
         </button>
       </header>
       <div className="content-wrapper">
@@ -137,32 +148,33 @@ const App: React.FC = () => {
 
           <div className="list-footer">
             <span className="items-left-count">{activeTodosCount} items left</span>
-            <div className="filter-buttons-group">
-              <button
-                onClick={() => handleSetFilter('all')}
-                className={`filter-button ${filter === 'all' ? 'active-filter' : ''}`}
-              >
-                All
-              </button>
-              <button
-                onClick={() => handleSetFilter('active')}
-                className={`filter-button ${filter === 'active' ? 'active-filter' : ''}`}
-              >
-                Active
-              </button>
-              <button
-                onClick={() => handleSetFilter('completed')}
-                className={`filter-button ${filter === 'completed' ? 'active-filter' : ''}`}
-              >
-                Completed
-              </button>
-            </div>
             <button onClick={clearCompleted} className="clear-completed-button">
               Clear Completed
             </button>
           </div>
-          <p className="drag-info-text">Drag and drop to reorder list (Functionality not implemented)</p>
         </div>
+
+        <div className="filter-card">
+          <button
+            onClick={() => handleSetFilter('all')}
+            className={`filter-button ${filter === 'all' ? 'active-filter' : ''}`}
+          >
+            All
+          </button>
+          <button
+            onClick={() => handleSetFilter('active')}
+            className={`filter-button ${filter === 'active' ? 'active-filter' : ''}`}
+          >
+            Active
+          </button>
+          <button
+            onClick={() => handleSetFilter('completed')}
+            className={`filter-button ${filter === 'completed' ? 'active-filter' : ''}`}
+          >
+            Completed
+          </button>
+        </div>
+        <p className="drag-info-text">Drag and drop to reorder list (Functionality not implemented)</p>
       </div>
     </div>
   );
